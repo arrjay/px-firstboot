@@ -1,0 +1,13 @@
+policy_module(px-firstboot, 1.0.1)
+gen_require(`
+  type init_t;
+  type unconfined_t;
+  role system_r;
+')
+
+type pxfirstboot_exec_t;
+files_type(pxfirstboot_exec_t)
+
+domain_auto_trans(init_t, pxfirstboot_exec_t, unconfined_t);
+allow unconfined_t pxfirstboot_exec_t:file entrypoint;
+role system_r types unconfined_t;

@@ -1,0 +1,14 @@
+[Unit]
+Description=Firstboot Setup Tasks
+ConditionPathExists=!/var/lib/px-firstboot/configured
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+# softdep for lldpad
+ExecStart=/usr/libexec/px-firstboot/startup
+ExecStart=/usr/bin/touch /var/lib/px-firstboot/configured
+
+[Install]
+WantedBy=multi-user.target
